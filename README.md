@@ -41,5 +41,13 @@ Ejecuta el servidor:
 npm start
 
 El servidor se ejecutará en: http://localhost:3000
+_____________________________________________________________________________
+
+Endpoints disponibles:
+
+Método	Ruta	Descripción
+GET	/tasks	Listar todas las tareas
+POST	/tasks	Crear una nueva tarea
+DELETE	/tasks/:id	Eliminar tarea por ID
 
 
