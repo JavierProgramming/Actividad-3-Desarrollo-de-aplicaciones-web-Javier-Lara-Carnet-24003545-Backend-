@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+// Proyecto: To Do List - Backend con Node.js y Express
+// Autor: [Tu Nombre]
+// Descripción: Servidor principal que arranca la API REST para Tareas y Metas
+
+const app = require('../app');
+const http = require('http');
+
+// Definir el puerto, por defecto será 3000 si no se proporciona otro
+const PORT = normalizePort(process.env.PORT || 3000);
+app.set('port', PORT);
+
+// Crear servidor HTTP
+const server = http.createServer(app);
+
+// Escuchar en el puerto configurado
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+server.on('error', handleError);
+
+// Función para normalizar el puerto (por si es cadena o número)
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+  if (isNaN(port)) return val;
+  if (port >= 0) return port;
+  return false;
+}
+
+// Manejo de errores comunes al iniciar el servidor
+function handleError(error) {
+  if (error.syscall !== 'listen') throw error;
+
+  const bind = typeof PORT === 'string' ? 'Pipe ' + PORT : 'Puerto ' + PORT;
+
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requiere privilegios elevados`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} ya está en uso`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
