@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Error ocurrido
+  if error.status
+    h2 Código de error: #{error.status}
+  else
+    h2 Código de error desconocido
+  if error.message
+    p Mensaje: #{error.message}
+  if error.stack
+    pre #{error.stack}
